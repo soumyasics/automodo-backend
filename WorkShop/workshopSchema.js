@@ -1,7 +1,7 @@
 const mongoose= require("mongoose");
 
-const mechSchema=mongoose.Schema({
-    firstname:{
+const shopSchema=mongoose.Schema({
+    name:{
         type:String,
         required:true
     },
@@ -10,10 +10,7 @@ const mechSchema=mongoose.Schema({
         type:Number,
         required:true
     },
-    lastname:{
-        type:String,
-        required:true
-    },  
+   
     email:{
         type:String,
         unique:true,
@@ -27,16 +24,26 @@ const mechSchema=mongoose.Schema({
     },image:{
         type:Object
     },
-    gender:{
-        type:String,
-        required:true
-    },
-    certificate: {
-        type:Object
-    },
+  city:{
+    type:String,
+    required:true
+}
+  ,
+  district:{
+    type:String,
+    required:true
+},
+    
     aadhar:{
         type:Number,
         required:true
+    },regno:{
+        type:String,
+        required:true
+    },
+    isactive:{
+        type:Boolean,
+        default:false
     }
 });
-module.exports=mongoose.model('mechanics',mechSchema)
+module.exports=mongoose.model('workshops',shopSchema)

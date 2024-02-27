@@ -1,5 +1,5 @@
 
-const mechSchema = require("./mechanicSchema");
+const workshops = require("./workshopSchema");
 const multer = require("multer");
 
 const storage = multer.diskStorage({
@@ -15,20 +15,23 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("image");
 //User Registration
 
-const addMechanic = (req, res) => {
-  const newMech = new mechSchema({
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
+const registerWorkshop = (req, res) => {
+  const newworkshops = new workshops({
+    name: req.body.name,
 
     email: req.body.email,
 
     contact: req.body.contact,
     password: req.body.password,
-    gender: req.body.gender,
-    certificate: req.file,
+    regno: req.body.regno,
+    city: req.body.city,
+
+    district: req.body.district,
+
+    image: req.file,
     aadhar:req.body.aadhar
   });
-  newMech
+  newworkshops
     .save()
     .then((data) => {
       res.json({
@@ -52,14 +55,14 @@ const addMechanic = (req, res) => {
       });
     });
 };
-//Mechanic Registration -- finished
+//Workshop Registration -- finished
 
-//Login Mechanic
-const loginCust = (req, res) => {
+//Login Workshop
+const loginworkshops = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  mechSchema
+  workshops
     .findOne({ email: email })
     .exec()
     .then((data) => {
@@ -96,13 +99,13 @@ const loginCust = (req, res) => {
       };
     
     
-//Login Mechanics --finished
+//Login Workshops --finished
 
-//View all Mechanics
+//View all Workshops
 
-const viewMechanics = (req, res) => {
-  mechSchema
-    .find()
+const viewApprovedWorkshops = (req, res) => {
+  workshops
+    .find({isactive:true})
     .exec()
     .then((data) => {
       if (data.length > 0) {
@@ -127,17 +130,76 @@ const viewMechanics = (req, res) => {
     });
 };
 
-// view Mechanics finished
+// view Workshops finished
 
+//View all Workshops reqs
 
+const viewWorkshopReqs = (req, res) => {
+  workshops
+    .find({isactive:false})
+    .exec()
+    .then((data) => {
+      if (data.length > 0) {
+        res.json({
+          status: 200,
+          msg: "Data obtained successfully",
+          data: data,
+        });
+      } else {
+        res.json({
+          status: 200,
+          msg: "No Data obtained ",
+        });
+      }
+    })
+    .catch((err) => {
+      res.json({
+        status: 500,
+        msg: "Data not Inserted",
+        Error: err,
+      });
+    });
+};
 
+// view Workshops finished
+
+//Approve Workshops
+
+const approveWorkshopById = (req, res) => {
+  workshops
+    .findByIdAndUpdate({_id:req.params.id,isactive:true})
+    .exec()
+    .then((data) => {
+      if (data.length > 0) {
+        res.json({
+          status: 200,
+          msg: "Data obtained successfully",
+          data: data,
+        });
+      } else {
+        res.json({
+          status: 200,
+          msg: "No Data obtained ",
+        });
+      }
+    })
+    .catch((err) => {
+      res.json({
+        status: 500,
+        msg: "Data not Inserted",
+        Error: err,
+      });
+    });
+};
+
+// approve Workshops finished
 
 //update  by id
-const editMechanicById = (req, res) => {
+const editWorkshopById = (req, res) => {
 
 
 
-  mechSchema.findByIdAndUpdate({ _id: req.params.id }, {
+  workshops.findByIdAndUpdate({ _id: req.params.id }, {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
 
@@ -163,8 +225,8 @@ const editMechanicById = (req, res) => {
     })
 }
 // view  by id
-const viewCustById = (req, res) => {
-  mechSchema.findById({ _id: req.params.id }).exec()
+const viewWorkshopById = (req, res) => {
+  workshops.findById({ _id: req.params.id }).exec()
     .then(data => {
       console.log(data);
       res.json({
@@ -184,9 +246,9 @@ const viewCustById = (req, res) => {
 
 }
 
-const deleteMechanicById = (req, res) => {
+const deleteWorkshopById = (req, res) => {
 
-  mechSchema.findByIdAndDelete({ _id: req.params.id }).exec()
+  workshops.findByIdAndDelete({ _id: req.params.id }).exec()
     .then(data => {
       console.log(data);
       res.json({
@@ -205,12 +267,14 @@ const deleteMechanicById = (req, res) => {
     })
 
 }
+
+
 //forgotvPawd
 const forgotPwd = (req, res) => {
 
 
 
-  mechSchema.findOneAndUpdate({ email: req.body.email }, {
+  workshops.findOneAndUpdate({ email: req.body.email }, {
 
     password: req.body.password
   })
@@ -223,7 +287,7 @@ const forgotPwd = (req, res) => {
       else
         res.json({
           status: 500,
-          msg: "Mechanic Not Found"
+          msg: "Workshop Not Found"
 
         })
     }).catch(err => {
@@ -238,13 +302,14 @@ const forgotPwd = (req, res) => {
 
 
 module.exports = {
-  addMechanic,
-  viewMechanics,
+  registerWorkshop,
+  viewWorkshopReqs,
   upload,
-  loginCust,
-  viewCustById,
-  viewMechanics,
-  editMechanicById,
+  loginworkshops,
+  approveWorkshopById,
+  viewWorkshopById,
+  viewApprovedWorkshops,
+  editWorkshopById,
   forgotPwd,
-  deleteMechanicById
+  deleteWorkshopById
 }

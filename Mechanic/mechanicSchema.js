@@ -37,6 +37,11 @@ const mechSchema=mongoose.Schema({
     aadhar:{
         type:Number,
         required:true
+    },
+    shopid:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:'workshops'
     }
 });
 module.exports=mongoose.model('mechanics',mechSchema)

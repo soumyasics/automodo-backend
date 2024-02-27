@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage }).single("image");
+const upload = multer({ storage: storage }).array("files");
 //User Registration
 
 const addMechanic = (req, res) => {
@@ -21,12 +21,14 @@ const addMechanic = (req, res) => {
     lastname: req.body.lastname,
 
     email: req.body.email,
-
+    shopid: req.body.shopid,
     contact: req.body.contact,
     password: req.body.password,
     gender: req.body.gender,
-    certificate: req.file,
-    aadhar:req.body.aadhar
+    image: req.files[0],
+
+    certificate: req.files[1],
+    aadhar: req.body.aadhar
   });
   newMech
     .save()
@@ -55,7 +57,7 @@ const addMechanic = (req, res) => {
 //Mechanic Registration -- finished
 
 //Login Mechanic
-const loginCust = (req, res) => {
+const loginMech = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
@@ -63,39 +65,39 @@ const loginCust = (req, res) => {
     .findOne({ email: email })
     .exec()
     .then((data) => {
-      if(data.length>0){
-        if(password==data.password){
+      if (data.length > 0) {
+        if (password == data.password) {
           res.json({
-            status:200,
-            msg:"Login successfully",
-            data:data
-        })
-      }else{
-        res.json({
-          status:401,
-          msg:"password Mismatch",
-          
-      })
+            status: 200,
+            msg: "Login successfully",
+            data: data
+          })
+        } else {
+          res.json({
+            status: 401,
+            msg: "password Mismatch",
+
+          })
+        }
       }
-    }
-    else{
+      else {
+        res.json({
+          status: 401,
+          msg: "No User Found",
+
+        })
+      }
+
+    }).catch(err => {
       res.json({
-        status:401,
-        msg:"No User Found",
-        
+        status: 500,
+        msg: "Internal server error",
+        Error: err
+      })
     })
-    }
-      
-    }).catch(err=>{
-    res.json({
-        status:500,
-        msg:"Internal server error",
-        Error:err
-    })
-    })
-      };
-    
-    
+};
+
+
 //Login Mechanics --finished
 
 //View all Mechanics
@@ -163,7 +165,7 @@ const editMechanicById = (req, res) => {
     })
 }
 // view  by id
-const viewCustById = (req, res) => {
+const viewMechById = (req, res) => {
   mechSchema.findById({ _id: req.params.id }).exec()
     .then(data => {
       console.log(data);
@@ -236,15 +238,46 @@ const forgotPwd = (req, res) => {
     })
 }
 
+//View all mech by shopid
+
+const viewMechanicsByShopid = (req, res) => {
+  mechSchema
+    .find({shopid:req.params.id})
+    .exec()
+    .then((data) => {
+      if (data.length > 0) {
+        res.json({
+          status: 200,
+          msg: "Data obtained successfully",
+          data: data,
+        });
+      } else {
+        res.json({
+          status: 200,
+          msg: "No Data obtained ",
+        });
+      }
+    })
+    .catch((err) => {
+      res.json({
+        status: 500,
+        msg: "Data not Inserted",
+        Error: err,
+      });
+    });
+};
+
+// view Workshops finished
 
 module.exports = {
   addMechanic,
   viewMechanics,
   upload,
-  loginCust,
-  viewCustById,
+  loginMech,
+  viewMechById,
   viewMechanics,
   editMechanicById,
   forgotPwd,
-  deleteMechanicById
+  deleteMechanicById,
+  viewMechanicsByShopid
 }
