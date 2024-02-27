@@ -104,7 +104,7 @@ const loginMech = (req, res) => {
 
 const viewMechanics = (req, res) => {
   mechSchema
-    .find()
+    .find().populate('shopid')
     .exec()
     .then((data) => {
       if (data.length > 0) {
@@ -166,7 +166,7 @@ const editMechanicById = (req, res) => {
 }
 // view  by id
 const viewMechById = (req, res) => {
-  mechSchema.findById({ _id: req.params.id }).exec()
+  mechSchema.findById({ _id: req.params.id }).populate('shopid').exec()
     .then(data => {
       console.log(data);
       res.json({
@@ -275,7 +275,6 @@ module.exports = {
   upload,
   loginMech,
   viewMechById,
-  viewMechanics,
   editMechanicById,
   forgotPwd,
   deleteMechanicById,
