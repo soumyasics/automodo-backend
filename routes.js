@@ -1,6 +1,6 @@
 const express=require('express')
 const router=express.Router()
-
+console.log("api worked");
 const customers=require('./Customer/customerController')
 const mechanic=require('./Mechanic/mechanicController')
 const workshops=require('./WorkShop/workshopController')
