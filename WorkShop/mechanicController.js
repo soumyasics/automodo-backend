@@ -1,11 +1,12 @@
 
-const customers = require("./customerSchema");
+const mechSchema = require("./mechanicSchema");
 const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, res, cb) {
     cb(null, "./upload");
   },
+
   filename: function (req, file, cb) {
     cb(null, file.originalname);
   },
@@ -14,8 +15,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("image");
 //User Registration
 
-const registerCustomer = (req, res) => {
-  const newCust = new customers({
+const addMechanic = (req, res) => {
+  const newMech = new mechSchema({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
 
@@ -24,9 +25,10 @@ const registerCustomer = (req, res) => {
     contact: req.body.contact,
     password: req.body.password,
     gender: req.body.gender,
-    image: req.file
+    certificate: req.file,
+    aadhar:req.body.aadhar
   });
-  newCust
+  newMech
     .save()
     .then((data) => {
       res.json({
@@ -50,14 +52,14 @@ const registerCustomer = (req, res) => {
       });
     });
 };
-//Customer Registration -- finished
+//Mechanic Registration -- finished
 
-//Login Customer
+//Login Mechanic
 const loginCust = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  customers
+  mechSchema
     .findOne({ email: email })
     .exec()
     .then((data) => {
@@ -94,12 +96,12 @@ const loginCust = (req, res) => {
       };
     
     
-//Login customers --finished
+//Login Mechanics --finished
 
-//View all customers
+//View all Mechanics
 
-const viewCustomers = (req, res) => {
-  customers
+const viewMechanics = (req, res) => {
+  mechSchema
     .find()
     .exec()
     .then((data) => {
@@ -125,17 +127,17 @@ const viewCustomers = (req, res) => {
     });
 };
 
-// view customers finished
+// view Mechanics finished
 
 
 
 
 //update  by id
-const editCustomerById = (req, res) => {
+const editMechanicById = (req, res) => {
 
 
 
-  customers.findByIdAndUpdate({ _id: req.params.id }, {
+  mechSchema.findByIdAndUpdate({ _id: req.params.id }, {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
 
@@ -162,7 +164,7 @@ const editCustomerById = (req, res) => {
 }
 // view  by id
 const viewCustById = (req, res) => {
-  customers.findById({ _id: req.params.id }).exec()
+  mechSchema.findById({ _id: req.params.id }).exec()
     .then(data => {
       console.log(data);
       res.json({
@@ -182,9 +184,9 @@ const viewCustById = (req, res) => {
 
 }
 
-const deleteCustomerById = (req, res) => {
+const deleteMechanicById = (req, res) => {
 
-  customers.findByIdAndDelete({ _id: req.params.id }).exec()
+  mechSchema.findByIdAndDelete({ _id: req.params.id }).exec()
     .then(data => {
       console.log(data);
       res.json({
@@ -208,7 +210,7 @@ const forgotPwd = (req, res) => {
 
 
 
-  doctors.findOneAndUpdate({ email: req.body.email }, {
+  mechSchema.findOneAndUpdate({ email: req.body.email }, {
 
     password: req.body.password
   })
@@ -221,7 +223,7 @@ const forgotPwd = (req, res) => {
       else
         res.json({
           status: 500,
-          msg: "customer Not Found"
+          msg: "Mechanic Not Found"
 
         })
     }).catch(err => {
@@ -236,13 +238,13 @@ const forgotPwd = (req, res) => {
 
 
 module.exports = {
-  registerCustomer,
-  viewCustomers,
+  addMechanic,
+  viewMechanics,
   upload,
   loginCust,
   viewCustById,
-  viewCustomers,
-  editCustomerById,
+  viewMechanics,
+  editMechanicById,
   forgotPwd,
-  deleteCustomerById
+  deleteMechanicById
 }
