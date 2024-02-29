@@ -208,7 +208,7 @@ const forgotPwd = (req, res) => {
 
 
 
-  doctors.findOneAndUpdate({ email: req.body.email }, {
+  customers.findOneAndUpdate({ email: req.body.email }, {
 
     password: req.body.password
   })
