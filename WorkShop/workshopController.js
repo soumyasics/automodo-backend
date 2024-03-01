@@ -66,37 +66,38 @@ const loginworkshops = (req, res) => {
     .findOne({ email: email })
     .exec()
     .then((data) => {
-      if(data.length>0){
-        if(password==data.password){
-          res.json({
-            status:200,
-            msg:"Login successfully",
-            data:data
-        })
-      }else{
-        res.json({
-          status:401,
-          msg:"password Mismatch",
-          
-      })
+      if (!data) {
+          return res.json({
+              status: 400,
+              msg: "User not found"
+          });
       }
-    }
-    else{
-      res.json({
-        status:401,
-        msg:"No User Found",
-        
-    })
-    }
-      
-    }).catch(err=>{
-    res.json({
-        status:500,
-        msg:"Internal server error",
-        Error:err
-    })
-    })
-      };
+      if (data.isactive === false) {
+          return res.json({
+              status: 403,
+              msg: "User is not active. Please contact administrator."
+          });
+      }
+      if (password === data.password) {
+          return res.status(200).json({
+              status: 200,
+              msg: "Login successfully",
+              data: data
+          });
+      } else {
+          return res.json({
+              status: 401,
+              msg: "Password mismatch"
+          });
+      }
+  })
+  .catch((err) => {
+      res.status(500).json({
+          status: 500,
+          msg: "Internal Server Error"
+      });
+  });
+ };
     
     
 //Login Workshops --finished
