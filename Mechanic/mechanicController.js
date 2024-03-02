@@ -21,7 +21,7 @@ const addMechanic = (req, res) => {
     lastname: req.body.lastname,
 
     email: req.body.email,
-    shopid: req.body.shopid,
+    shopid: req.params.id,
     contact: req.body.contact,
     password: req.body.password,
     gender: req.body.gender,
@@ -40,6 +40,7 @@ const addMechanic = (req, res) => {
       });
     })
     .catch((err) => {
+      console.log(err);
       if (err.code == 1100) {
         return res.json({
           status: 409,
