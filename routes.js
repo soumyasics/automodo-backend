@@ -27,7 +27,7 @@ router.post('/forgotPwdWorkshop',workshops.forgotPwd)
 router.post('/deleteWorkshopById/:id',workshops.deleteWorkshopById)
 
 // mechanic routes
-router.post('/addMechanic',mechanic.upload,mechanic.addMechanic)
+router.post('/addMechanic/:id',mechanic.upload,mechanic.addMechanic)
 router.post('/viewMechanics',mechanic.viewMechanics)
 router.post('/viewMechById/:id',mechanic.viewMechById)
 router.post('/editMechanicById/:id',mechanic.editMechanicById)
