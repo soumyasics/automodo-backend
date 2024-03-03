@@ -47,5 +47,7 @@ router.post('/viewServicesByWid/:id', services.viewServicesByWid)
 router.post('/editServiceById/:id', services.editServiceById)
 router.post('/viewServiceById/:id', services.viewServiceById)
 router.post('/deleteServiceById/:id', services.deleteServiceById)
+router.post('/viewallservices', services.viewallservices)
+
 
 module.exports = router
