@@ -168,29 +168,22 @@ const viewWorkshopReqs = (req, res) => {
 
 const approveWorkshopById = (req, res) => {
   workshops
-    .findByIdAndUpdate({_id:req.params.id,isactive:true})
+    .findByIdAndUpdate({_id:req.params.id},{isactive:true})
     .exec()
-    .then((data) => {
-      if (data.length > 0) {
-        res.json({
-          status: 200,
-          msg: "Data obtained successfully",
-          data: data,
-        });
-      } else {
-        res.json({
-          status: 200,
-          msg: "No Data obtained ",
-        });
-      }
-    })
-    .catch((err) => {
+    .then((result) => {
       res.json({
-        status: 500,
-        msg: "Data not Inserted",
-        Error: err,
-      });
-    });
+          status: 200,
+          data: result,
+          msg: 'data obtained'
+      })
+  })
+  .catch(err => {
+      res.json({
+          status: 500,
+          msg: 'Error in API',
+          err: err
+      })
+  })
 };
 
 // approve Workshops finished
@@ -227,6 +220,8 @@ const editWorkshopById = (req, res) => {
 }
 // view  by id
 const viewWorkshopById = (req, res) => {
+  console.log(req.params.id);
+
   workshops.findById({ _id: req.params.id }).exec()
     .then(data => {
       console.log(data);

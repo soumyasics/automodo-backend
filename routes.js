@@ -28,14 +28,16 @@ router.post('/forgotPwdWorkshop', workshops.forgotPwd)
 router.post('/deleteWorkshopById/:id', workshops.deleteWorkshopById)
 
 // mechanic routes
-router.post('/addMechanic', mechanic.upload, mechanic.addMechanic)
-router.post('/viewMechanics', mechanic.viewMechanics)
-router.post('/viewMechById/:id', mechanic.viewMechById)
-router.post('/editMechanicById/:id', mechanic.editMechanicById)
-router.post('/loginMech', mechanic.loginMech)
-router.post('/forgotPwdCustomer', mechanic.forgotPwd)
-router.post('/deleteMechanicById/:id', mechanic.deleteMechanicById)
-router.post('/viewMechanicsByShopid/:id', mechanic.viewMechanicsByShopid)
+
+router.post('/addMechanic/:id',mechanic.upload,mechanic.addMechanic)
+router.post('/viewMechanics',mechanic.viewMechanics)
+router.post('/viewMechById/:id',mechanic.viewMechById)
+router.post('/editMechanicById/:id',mechanic.editMechanicById)
+router.post('/loginMech',mechanic.loginMech)
+router.post('/forgotPwdCustomer',mechanic.forgotPwd)
+router.post('/deleteMechanicById/:id',mechanic.deleteMechanicById)
+router.post('/viewMechanicsByShopid/:id',mechanic.viewMechanicsByShopid)
+
 
 
 // services routes
@@ -45,5 +47,7 @@ router.post('/viewServicesByWid/:id', services.viewServicesByWid)
 router.post('/editServiceById/:id', services.editServiceById)
 router.post('/viewServiceById/:id', services.viewServiceById)
 router.post('/deleteServiceById/:id', services.deleteServiceById)
+router.post('/viewallservices', services.viewallservices)
+
 
 module.exports = router
