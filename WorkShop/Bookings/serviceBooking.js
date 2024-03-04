@@ -10,6 +10,7 @@ const bookingSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "rp",
         required: true,
+        
     },
     serviceid: {
         type: mongoose.Schema.Types.ObjectId,
