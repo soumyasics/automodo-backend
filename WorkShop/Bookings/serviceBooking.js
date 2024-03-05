@@ -28,6 +28,22 @@ const bookingSchema = mongoose.Schema({
     paymentstatus: {
         type: Boolean,
         default: false
+    },
+    mechid:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "mechanics",
+    },
+    approvalstatus:{
+        type: Boolean,
+        default: false
+    },
+    mechAssigned:{
+        type: Boolean,
+        default: false
+    },
+    completedStatus:{
+        type: Boolean,
+        default: false
     }
 });
 module.exports = mongoose.model('servicebookings', bookingSchema)
