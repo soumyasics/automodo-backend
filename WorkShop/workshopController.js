@@ -149,6 +149,7 @@ const viewWorkshopReqs = (req, res) => {
       } else {
         res.json({
           status: 200,
+          data:data,
           msg: "No Data obtained ",
         });
       }

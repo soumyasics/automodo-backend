@@ -216,7 +216,8 @@ const forgotPwd = (req, res) => {
       if (data != null)
         res.json({
           status: 200,
-          msg: "Updated successfully"
+          msg: "Updated successfully",
+          data:data
         })
       else
         res.json({

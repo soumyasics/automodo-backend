@@ -2,6 +2,7 @@ const serviceSchema = require("../Services/serviceSchema");
 const serviceBookings = require("./serviceBooking");
 
 const bookaService =async (req, res) => {
+  console.log('req',req);
     let shopid=null,date=new Date()
 await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
     shopid=datas.shopid
@@ -21,6 +22,7 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
     await newBooking
       .save()
       .then((data) => {
+        console.log(data);
         res.json({
           status: 200,
           msg: "Booked successfully",
@@ -28,7 +30,7 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
         });
       })
       .catch((err) => {
-        
+        console.log(err);
         res.json({
           status: 500,
           msg: "Data not Inserted",
