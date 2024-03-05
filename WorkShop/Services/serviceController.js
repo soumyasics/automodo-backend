@@ -2,7 +2,7 @@ const serviceSchema = require('./serviceSchema')
 
 
 const registerService = (req, res) => {
-    const newService = new workshops({
+    const newService = new serviceSchema({
         serviceName: req.body.serviceName,
 
         description: req.body.description,
@@ -20,7 +20,7 @@ const registerService = (req, res) => {
             });
         })
         .catch((err) => {
-
+console.log(err);
             res.json({
                 status: 500,
                 msg: "Data not Inserted",
@@ -128,6 +128,28 @@ const viewServiceById = (req, res) => {
   
   }
   
+  const viewallservices = (req, res) => {
+    serviceSchema.find({}).populate('shopid').exec()
+      .then(data => {
+        console.log(data);
+        res.json({
+          status: 200,
+          msg: "Data obtained successfully",
+          data: data
+        })
+  
+      }).catch(err => {
+        console.log(err);
+        res.json({
+          status: 500,
+          msg: "No Data obtained",
+          Error: err
+        })
+      })
+  
+  }
+  
+
   const deleteServiceById = (req, res) => {
   
     serviceSchema.findByIdAndDelete({ _id: req.params.id }).exec()
@@ -155,5 +177,6 @@ module.exports = {
     searchServicesByName,
     editServiceById,
     deleteServiceById,
-    viewServiceById
+    viewServiceById,
+    viewallservices
 }
