@@ -37,6 +37,125 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
       });
   };
 
+
+  const viewBookingByWid = (req, res) => {
+    serviceBookings.find({shopid:req.params.id}).populate('custid').exec()
+      .then(data => {
+        console.log(data);
+        res.json({
+          status: 200,
+          msg: "Data obtained successfully",
+          data: data
+        })
+  
+      }).catch(err => {
+        console.log(err);
+        res.json({
+          status: 500,
+          msg: "No Data obtained",
+          Error: err
+        })
+      })
+  
+  }
+
+  const viewBookingByCustid = (req, res) => {
+    serviceBookings.find({custid:req.params.id})
+    .populate('shopid')
+    .populate('serviceid')
+    .exec()
+      .then(data => {
+        console.log(data);
+        res.json({
+          status: 200,
+          msg: "Data obtained successfully",
+          data: data
+        })
+  
+      }).catch(err => {
+        console.log(err);
+        res.json({
+          status: 500,
+          msg: "No Data obtained",
+          Error: err
+        })
+      })
+  
+  }
+
+
+  const approveBookingByWid = (req, res) => {
+    serviceBookings.findByIdAndUpdate({_id:req.params.id},{
+      approvalstatus:true
+    }).exec()
+      .then(data => {
+        console.log(data);
+        res.json({
+          status: 200,
+          msg: "Data obtained successfully",
+          data: data
+        })
+  
+      }).catch(err => {
+        console.log(err);
+        res.json({
+          status: 500,
+          msg: "No Data obtained",
+          Error: err
+        })
+      })
+  
+  }
+  const assignMechForService=(req,res)=>{
+    serviceBookings.findByIdAndUpdate({_id:req.params.id},{
+      mechAssigned:true,
+      mechid:req.body.mechid
+    }).exec()
+      .then(data => {
+        console.log(data);
+        res.json({
+          status: 200,
+          msg: "Data obtained successfully",
+          data: data
+        })
+  
+      }).catch(err => {
+        console.log(err);
+        res.json({
+          status: 500,
+          msg: "No Data obtained",
+          Error: err
+        })
+      })
+  }
+  const viewBookingByMechid = (req, res) => {
+    serviceBookings.find({mechid:req.params.id})
+    .populate('custid')
+    .populate('serviceid')
+    .exec()
+      .then(data => {
+        console.log(data);
+        res.json({
+          status: 200,
+          msg: "Data obtained successfully",
+          data: data
+        })
+  
+      }).catch(err => {
+        console.log(err);
+        res.json({
+          status: 500,
+          msg: "No Data obtained",
+          Error: err
+        })
+      })
+  
+  }
   module.exports={
-    bookaService
+    bookaService,
+    viewBookingByWid,
+    viewBookingByCustid,
+    approveBookingByWid,
+    assignMechForService,
+    viewBookingByMechid
   }
