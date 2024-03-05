@@ -3,18 +3,18 @@ const mongoose = require("mongoose");
 const bookingSchema = mongoose.Schema({
     custid: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "parents",
+        ref: "customers",
         required: true,
     },
     
     shopid: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "rp",
+        ref: "workshops",
         required: true,
     },
     serviceid: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "rp",
+        ref: "services",
         required: true,
     },
     servicedate: {

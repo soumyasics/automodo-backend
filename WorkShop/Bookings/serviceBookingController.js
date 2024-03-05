@@ -2,7 +2,7 @@ const serviceSchema = require("../Services/serviceSchema");
 const serviceBookings = require("./serviceBooking");
 
 const bookaService =async (req, res) => {
-    let shopid=null
+    let shopid=null,date=new Date()
 await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
     shopid=datas.shopid
 })
@@ -16,7 +16,7 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
         serviceid: req.params.serviceid,
         servicedate: req.body.servicedate,
         shopid:shopid,
-        bookingdate:req.body.bookingdate
+        bookingdate:date
     });
     await newBooking
       .save()
