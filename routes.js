@@ -5,6 +5,7 @@ const customers = require('./Customer/customerController')
 const mechanic = require('./Mechanic/mechanicController')
 const workshops = require('./WorkShop/workshopController')
 const services = require('./WorkShop/Services/serviceController')
+const booking = require('./WorkShop/Bookings/serviceBookingController')
 
 // Customer routes
 router.post('/registerCustomer', customers.upload, customers.registerCustomer)
@@ -48,6 +49,10 @@ router.post('/editServiceById/:id', services.editServiceById)
 router.post('/viewServiceById/:id', services.viewServiceById)
 router.post('/deleteServiceById/:id', services.deleteServiceById)
 router.post('/viewallservices', services.viewallservices)
+
+
+//booking
+router.post('/bookaService/:serviceid', booking.bookaService)
 
 
 module.exports = router
