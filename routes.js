@@ -51,7 +51,7 @@ router.post('/deleteServiceById/:id', services.deleteServiceById)
 router.post('/viewallservices', services.viewallservices)
 
 
-//booking
+//booking routes
 router.post('/bookaService/:serviceid', booking.bookaService)
 
 
