@@ -64,7 +64,7 @@ const loginCust = (req, res) => {
       console.log(data);
       if(!data){
       return  res.json({
-          status:401,
+          status:405,
           msg:"No User Found",
           
       })
