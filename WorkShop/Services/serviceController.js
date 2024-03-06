@@ -35,7 +35,7 @@ console.log(err);
 
 const viewServicesByWid = (req, res) => {
     serviceSchema
-        .find({ shopid: req.body.shopid })
+        .find({ shopid: req.params.id })
         .exec()
         .then((data) => {
             if (data.length > 0) {
