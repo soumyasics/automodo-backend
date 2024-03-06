@@ -83,7 +83,28 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
   
   }
 
-
+  const updatePaymentbyBookingId = (req, res) => {
+    serviceBookings.findByIdAndUpdate({_id:req.params.id},{paymentstatus:true})
+    
+    .exec()
+      .then(data => {
+        console.log(data);
+        res.json({
+          status: 200,
+          msg: "Data Updated  successfully",
+          data: data
+        })
+  
+      }).catch(err => {
+        console.log(err);
+        res.json({
+          status: 500,
+          msg: "No Data obtained",
+          Error: err
+        })
+      })
+  
+  }
   const approveBookingByWid = (req, res) => {
     serviceBookings.findByIdAndUpdate({_id:req.params.id},{
       approvalstatus:true
@@ -157,5 +178,6 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
     viewBookingByCustid,
     approveBookingByWid,
     assignMechForService,
-    viewBookingByMechid
+    viewBookingByMechid,
+    updatePaymentbyBookingId
   }

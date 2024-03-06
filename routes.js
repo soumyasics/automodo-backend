@@ -58,6 +58,7 @@ router.post('/viewBookingByCustid/:id', booking.viewBookingByCustid)
 router.post('/approveBookingByWid/:id', booking.approveBookingByWid)
 router.post('/assignMechForService/:id', booking.assignMechForService)
 router.post('/viewBookingByMechid/:id', booking.viewBookingByMechid)
+router.post('/updatePaymentbyBookingId', booking.updatePaymentbyBookingId)
 
 
 module.exports = router
