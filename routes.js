@@ -51,8 +51,14 @@ router.post('/deleteServiceById/:id', services.deleteServiceById)
 router.post('/viewallservices', services.viewallservices)
 
 
-//booking
+//booking routes
 router.post('/bookaService/:serviceid', booking.bookaService)
+router.post('/viewBookingByWid/:id', booking.viewBookingByWid)
+router.post('/viewBookingByCustid/:id', booking.viewBookingByCustid)
+router.post('/approveBookingByWid/:id', booking.approveBookingByWid)
+router.post('/assignMechForService/:id', booking.assignMechForService)
+router.post('/viewBookingByMechid/:id', booking.viewBookingByMechid)
+// router.post('/updatePaymentbyBookingId', booking.updatePaymentbyBookingId) -- not needed
 
 
 module.exports = router
