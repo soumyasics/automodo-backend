@@ -53,6 +53,11 @@ router.post('/viewallservices', services.viewallservices)
 
 //booking routes
 router.post('/bookaService/:serviceid', booking.bookaService)
+router.post('/viewBookingByWid/:id', booking.viewBookingByWid)
+router.post('/viewBookingByCustid/:id', booking.viewBookingByCustid)
+router.post('/approveBookingByWid/:id', booking.approveBookingByWid)
+router.post('/assignMechForService/:id', booking.assignMechForService)
+router.post('/viewBookingByMechid/:id', booking.viewBookingByMechid)
 
 
 module.exports = router
