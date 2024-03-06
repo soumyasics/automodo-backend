@@ -16,7 +16,8 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
         serviceid: req.params.serviceid,
         servicedate: req.body.servicedate,
         shopid:shopid,
-        bookingdate:date
+        bookingdate:date,
+        paymentstatus:true
     });
     await newBooking
       .save()
