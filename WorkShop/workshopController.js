@@ -195,15 +195,16 @@ const editWorkshopById = (req, res) => {
 
 
   workshops.findByIdAndUpdate({ _id: req.params.id }, {
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-
+    name: req.body.name,
     email: req.body.email,
-
     contact: req.body.contact,
     password: req.body.password,
-    gender: req.body.gender,
-    image: req.file
+    regno: req.body.regno,
+    city: req.body.city,
+    district: req.body.district,
+    image: req.file,
+    aadhar:req.body.aadhar
+
   })
     .exec().then(data => {
       res.json({
