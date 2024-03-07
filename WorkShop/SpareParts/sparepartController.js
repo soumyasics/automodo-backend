@@ -1,5 +1,18 @@
 const spareparts = require('./sparepartsSchema')
 
+const multer=require('multer')
+
+
+const storage = multer.diskStorage({
+  destination: function (req, res, cb) {
+    cb(null, "./upload");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage }).single("img");
 
 const addSpareParts = (req, res) => {
     const newSparePart = new spareparts({
@@ -9,7 +22,7 @@ const addSpareParts = (req, res) => {
         shopid: req.body.shopid,
         manufacturer:req.body.manufacturer,
         count:req.body.count,
-        img:req.body.img
+        img:req.file
     });
     newSparePart
         .save()
@@ -180,5 +193,6 @@ module.exports = {
     editSparePartById,
     deleteSparePartById,
     viewSparePartByWid,
-    viewallSpareParts
+    viewallSpareParts,
+    upload
 }

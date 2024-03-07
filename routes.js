@@ -6,6 +6,7 @@ const mechanic = require('./Mechanic/mechanicController')
 const workshops = require('./WorkShop/workshopController')
 const services = require('./WorkShop/Services/serviceController')
 const booking = require('./WorkShop/Bookings/serviceBookingController')
+const sparepartController = require('./WorkShop/SpareParts/sparepartController')
 const spareparts = require('./WorkShop/SpareParts/sparepartController')
 
 // Customer routes
@@ -60,6 +61,16 @@ router.post('/viewBookingByCustid/:id', booking.viewBookingByCustid)
 router.post('/approveBookingByWid/:id', booking.approveBookingByWid)
 router.post('/assignMechForService/:id', booking.assignMechForService)
 router.post('/viewBookingByMechid/:id', booking.viewBookingByMechid)
+// router.post('/updatePaymentbyBookingId', booking.updatePaymentbyBookingId) -- not needed
+
+//spareparts
+router.post('/addSpareParts',sparepartController.upload, sparepartController.addSpareParts)
+router.post('/viewSparePartById/:id', sparepartController.viewSparePartById)
+router.post('/searchSparePartByName/:partName',sparepartController.searchSparePartByName)
+router.post('/editSparePartById/:id',sparepartController.upload, sparepartController.editSparePartById)
+router.post('/deleteSparePartById/:partName',sparepartController.deleteSparePartById)
+router.post('/viewSparePartByWid',sparepartController.viewSparePartByWid)
+router.post('/viewallSpareParts',sparepartController.viewallSpareParts)
 
 
 module.exports = router
