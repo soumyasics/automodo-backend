@@ -64,7 +64,7 @@ const loginCust = (req, res) => {
       console.log(data);
       if(!data){
       return  res.json({
-          status:401,
+          status:405,
           msg:"No User Found",
           
       })
@@ -216,7 +216,8 @@ const forgotPwd = (req, res) => {
       if (data != null)
         res.json({
           status: 200,
-          msg: "Updated successfully"
+          msg: "Updated successfully",
+          data:data
         })
       else
         res.json({

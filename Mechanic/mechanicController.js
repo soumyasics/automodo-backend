@@ -26,7 +26,6 @@ const addMechanic = (req, res) => {
     password: req.body.password,
     gender: req.body.gender,
     image: req.files[0],
-
     certificate: req.files[1],
     aadhar: req.body.aadhar
   });
