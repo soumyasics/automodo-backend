@@ -2,6 +2,7 @@ const serviceSchema = require("../Services/serviceSchema");
 const serviceBookings = require("./serviceBooking");
 
 const bookaService =async (req, res) => {
+  console.log('req',req);
     let shopid=null,date=new Date()
 await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
     shopid=datas.shopid
@@ -22,6 +23,7 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
     await newBooking
       .save()
       .then((data) => {
+        console.log(data);
         res.json({
           status: 200,
           msg: "Booked successfully",
@@ -29,7 +31,7 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
         });
       })
       .catch((err) => {
-        
+        console.log(err);
         res.json({
           status: 500,
           msg: "Data not Inserted",
@@ -40,7 +42,10 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
 
 
   const viewBookingByWid = (req, res) => {
-    serviceBookings.find({shopid:req.params.id}).populate('custid').exec()
+    serviceBookings.find({shopid:req.params.id,approvalstatus:false})
+    .populate('custid')
+    .populate('serviceid')
+    .exec()
       .then(data => {
         console.log(data);
         res.json({
@@ -59,6 +64,31 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
       })
   
   }
+
+  const viewbookigbyid = (req, res) => {
+    serviceBookings.findById({_id:req.params.id})
+    .populate('custid')
+    .populate('serviceid')
+    .exec()
+      .then(data => {
+        console.log(data);
+        res.json({
+          status: 200,
+          msg: "Data obtained successfully",
+          data: data
+        })
+  
+      }).catch(err => {
+        console.log(err);
+        res.json({
+          status: 500,
+          msg: "No Data obtained",
+          Error: err
+        })
+      })
+  
+  }
+
 
   const viewBookingByCustid = (req, res) => {
     serviceBookings.find({custid:req.params.id})
@@ -180,5 +210,6 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
     approveBookingByWid,
     assignMechForService,
     viewBookingByMechid,
-    updatePaymentbyBookingId
+    updatePaymentbyBookingId,
+    viewbookigbyid
   }
