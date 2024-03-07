@@ -49,7 +49,7 @@ console.log(err);
 
 const viewSparePartByWid = (req, res) => {
     spareparts
-        .find({ shopid: req.body.shopid, count: {$gt : 0} })
+        .find({ shopid: req.params.id, count: {$gt : 0} })
         .exec()
         .then((data) => {
             if (data.length > 0) {
@@ -62,6 +62,7 @@ const viewSparePartByWid = (req, res) => {
                 res.json({
                     status: 200,
                     msg: "No Data obtained ",
+                    data:data
                 });
             }
         })
@@ -95,15 +96,13 @@ const editSparePartById = (req, res) => {
 
     spareparts.findByIdAndUpdate({ _id: req.params.id }, {
 
-        partName: req.body.serviceName,
-
+        partName: req.body.partName,
         description: req.body.description,
-
         price: req.body.price,
         shopid: req.body.shopid,
         manufacturer:req.body.manufacturer,
         count:req.body.count,
-        img:req.body.img
+        img:req.file
     })
         .exec().then(data => {
             res.json({
