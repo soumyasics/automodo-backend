@@ -62,39 +62,40 @@ const loginMech = (req, res) => {
   const password = req.body.password;
 
   mechSchema
-    .findOne({ email: email })
-    .exec()
-    .then((data) => {
-      if (data.length > 0) {
-        if (password == data.password) {
-          res.json({
+  .findOne({ email: email })
+  .exec()
+  .then((data) => {
+    if (!data) {
+        return res.json({
+            status: 400,
+            msg: "User not found"
+        });
+    }
+    if (data.isactive === false) {
+        return res.json({
+            status: 403,
+            msg: "User is not active. Please contact administrator."
+        });
+    }
+    if (password === data.password) {
+        return res.status(200).json({
             status: 200,
             msg: "Login successfully",
             data: data
-          })
-        } else {
-          res.json({
+        });
+    } else {
+        return res.json({
             status: 401,
-            msg: "password Mismatch",
-
-          })
-        }
-      }
-      else {
-        res.json({
-          status: 401,
-          msg: "No User Found",
-
-        })
-      }
-
-    }).catch(err => {
-      res.json({
+            msg: "Password mismatch"
+        });
+    }
+})
+.catch((err) => {
+    res.status(500).json({
         status: 500,
-        msg: "Internal server error",
-        Error: err
-      })
-    })
+        msg: "Internal Server Error"
+    });
+});
 };
 
 
