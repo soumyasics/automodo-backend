@@ -9,7 +9,6 @@ const booking = require('./WorkShop/Bookings/serviceBookingController')
 const sparepartController = require('./WorkShop/SpareParts/sparepartController')
 // const spareparts = require('./WorkShop/SpareParts/sparepartController')
 const spareOrderController = require('./WorkShop/SpareParts/Orders/spareOrderController')
-
 // Customer routes
 router.post('/registerCustomer', customers.upload, customers.registerCustomer)
 router.post('/viewCustomers', customers.viewCustomers)
