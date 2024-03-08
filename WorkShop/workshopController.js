@@ -90,16 +90,14 @@ const loginworkshops = (req, res) => {
               msg: "Password mismatch"
           });
       }
-  }).catch(err=>{
-    res.json({
-        status:500,
-        msg:"Internal server error",
-        Error:err
-    })
-    })
-      };
-    
-    
+  })
+  .catch((err) => {
+      res.status(500).json({
+          status: 500,
+          msg: "Internal Server Error"
+      });
+  });
+ };
 //Login Workshops --finished
 
 //View all Workshops
