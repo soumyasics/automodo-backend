@@ -9,6 +9,9 @@ const booking = require('./WorkShop/Bookings/serviceBookingController')
 const sparepartController = require('./WorkShop/SpareParts/sparepartController')
 // const spareparts = require('./WorkShop/SpareParts/sparepartController')
 const spareOrderController = require('./WorkShop/SpareParts/Orders/spareOrderController')
+const emergencyController = require('./WorkShop/Emergency/emergencyController')
+
+
 // Customer routes
 router.post('/registerCustomer', customers.upload, customers.registerCustomer)
 router.post('/viewCustomers', customers.viewCustomers)
@@ -76,6 +79,12 @@ router.post('/viewallSpareParts',sparepartController.viewallSpareParts)
 router.post('/bookSparePart',spareOrderController.bookSparePart)
 router.post('/viewBookingByUserid/:id',spareOrderController.viewBookingByUserid)
 router.post('/viewSparePartBookingByWid/:id',spareOrderController.viewSparePartBookingByWid)
+
+
+//Emergency
+router.post('/addEmergency',emergencyController.addEmergency)
+router.post('/adminApproveEmergencyReqs/:id',emergencyController.adminApproveEmergencyReqs)
+router.post('/viewEmergencyForShops',emergencyController.viewEmergencyForShops)
 
 
 module.exports = router
