@@ -6,6 +6,7 @@ const bookingSchema = mongoose.Schema({
         ref: "customers",
         required: true,
     },
+    
     shopid: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "workshops",

@@ -7,6 +7,7 @@ const workshops = require('./WorkShop/workshopController')
 const services = require('./WorkShop/Services/serviceController')
 const booking = require('./WorkShop/Bookings/serviceBookingController')
 const sparepartController = require('./WorkShop/SpareParts/sparepartController')
+// const spareparts = require('./WorkShop/SpareParts/sparepartController')
 const spareOrderController = require('./WorkShop/SpareParts/Orders/spareOrderController')
 
 // Customer routes
@@ -56,6 +57,7 @@ router.post('/viewallservices', services.viewallservices)
 //booking routes
 router.post('/bookaService/:serviceid', booking.bookaService)
 router.post('/viewBookingByWid/:id', booking.viewBookingByWid)
+router.post('/viewbookigbyid/:id', booking.viewbookigbyid)
 router.post('/viewBookingByCustid/:id', booking.viewBookingByCustid)
 router.post('/approveBookingByWid/:id', booking.approveBookingByWid)
 router.post('/assignMechForService/:id', booking.assignMechForService)

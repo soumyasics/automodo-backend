@@ -16,10 +16,8 @@ const upload = multer({ storage: storage }).single("img");
 
 const addSpareParts = (req, res) => {
     const newSparePart = new spareparts({
-        partName: req.body.serviceName,
-
+        partName: req.body.partName,
         description: req.body.description,
-
         price: req.body.price,
         shopid: req.body.shopid,
         manufacturer:req.body.manufacturer,
