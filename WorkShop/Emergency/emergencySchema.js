@@ -12,9 +12,8 @@ const schema = mongoose.Schema({
         ref: "workshops",
         default:null
     },
-    serviceid: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "services"
+    service: {
+        type: String
     },
     date: {
         type: Date,
