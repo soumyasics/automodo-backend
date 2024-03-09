@@ -3,7 +3,7 @@ const spareOrders = require('./spareOrders')
 
 
 const bookSparePart =async (req, res) => {
-    let shopid=null
+    let shopid=null,count=0
     await sparepartsSchema.findById({_id:req.body.sparepartid}).exec().then(data=>{
         shopid=data.shopid
     }).catch(err=>{
@@ -34,6 +34,19 @@ console.log(err);
                 Error: err,
             });
         });
+      await  sparepartsSchema.findById({_id:req.body.sparepartid}).exec().then(datas=>{
+        count=datas.count
+      }).catch(err=>{
+        console.log(err);
+      })
+
+      await sparepartsSchema.findByIdAndUpdate({_id:req.body.sparepartid},{
+          count:(count-req.body.Quantity)
+        }).exec().then(datass=>{
+        console.log("updated count");
+        }).catch(err=>{
+          console.log(err);
+        })
 };
 
 const viewSparePartBookingByWid = (req, res) => {
