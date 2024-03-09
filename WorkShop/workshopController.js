@@ -98,8 +98,6 @@ const loginworkshops = (req, res) => {
       });
   });
  };
-    
-    
 //Login Workshops --finished
 
 //View all Workshops

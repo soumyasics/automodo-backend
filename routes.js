@@ -7,7 +7,10 @@ const workshops = require('./WorkShop/workshopController')
 const services = require('./WorkShop/Services/serviceController')
 const booking = require('./WorkShop/Bookings/serviceBookingController')
 const sparepartController = require('./WorkShop/SpareParts/sparepartController')
-const spareparts = require('./WorkShop/SpareParts/sparepartController')
+// const spareparts = require('./WorkShop/SpareParts/sparepartController')
+const spareOrderController = require('./WorkShop/SpareParts/Orders/spareOrderController')
+const emergencyController = require('./WorkShop/Emergency/emergencyController')
+
 
 // Customer routes
 router.post('/registerCustomer', customers.upload, customers.registerCustomer)
@@ -71,6 +74,17 @@ router.post('/editSparePartById/:id',sparepartController.upload, sparepartContro
 router.post('/deleteSparePartById/:id',sparepartController.deleteSparePartById)
 router.post('/viewSparePartByWid/:id',sparepartController.viewSparePartByWid)
 router.post('/viewallSpareParts',sparepartController.viewallSpareParts)
+
+//spare part booking
+router.post('/bookSparePart',spareOrderController.bookSparePart)
+router.post('/viewBookingByUserid/:id',spareOrderController.viewBookingByUserid)
+router.post('/viewSparePartBookingByWid/:id',spareOrderController.viewSparePartBookingByWid)
+
+
+//Emergency
+router.post('/addEmergency',emergencyController.addEmergency)
+router.post('/adminApproveEmergencyReqs/:id',emergencyController.adminApproveEmergencyReqs)
+router.post('/viewEmergencyForShops',emergencyController.viewEmergencyForShops)
 
 
 module.exports = router
