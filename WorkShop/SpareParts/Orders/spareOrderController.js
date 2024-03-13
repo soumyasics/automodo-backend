@@ -50,7 +50,10 @@ console.log(err);
 };
 
 const viewSparePartBookingByWid = (req, res) => {
-    spareOrders.find({shopid:req.params.id}).populate('userid').exec()
+    spareOrders.find({shopid:req.params.id})
+    .populate('userid')
+    .populate('sparepartid')
+    .exec()
       .then(data => {
         console.log(data);
         res.json({

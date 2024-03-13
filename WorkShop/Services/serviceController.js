@@ -64,7 +64,7 @@ const viewServicesByWid = (req, res) => {
 // view services finished
 
 const searchServicesByName = (req, res) => {
-    Service.find({ serviceName: { $regex: req.params.serviceName, $options: 'i' } }).populate('shopid')
+    serviceSchema.find({ serviceName: { $regex: req.params.serviceName, $options: 'i' } }).populate('shopid')
         .then(services => {
             if (services.length === 0) {
                 return res.status(404).json({ message: 'No services found with the serviceName.' });

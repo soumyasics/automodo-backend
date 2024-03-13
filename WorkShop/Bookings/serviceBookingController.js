@@ -203,6 +203,28 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
       })
   
   }
+  const deleteservicebookingById = (req, res) => {
+  
+    serviceBookings.findByIdAndDelete({ _id: req.params.id }).exec()
+      .then(data => {
+        console.log(data);
+        res.json({
+          status: 200,
+          msg: "Data removed successfully",
+          data: data
+        })
+  
+      }).catch(err => {
+        console.log(err);
+        res.json({
+          status: 500,
+          msg: "No Data obtained",
+          Error: err
+        })
+      })
+  
+  }
+
   module.exports={
     bookaService,
     viewBookingByWid,
@@ -211,5 +233,6 @@ await serviceSchema.findById({_id: req.params.serviceid}).exec().then(datas=>{
     assignMechForService,
     viewBookingByMechid,
     updatePaymentbyBookingId,
-    viewbookigbyid
+    viewbookigbyid,
+    deleteservicebookingById
   }
