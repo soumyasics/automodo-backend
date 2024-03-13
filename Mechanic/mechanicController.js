@@ -256,6 +256,7 @@ const viewMechanicsByShopid = (req, res) => {
         res.json({
           status: 200,
           msg: "No Data obtained ",
+          data: data,
         });
       }
     })

@@ -189,9 +189,6 @@ const approveWorkshopById = (req, res) => {
 
 //update  by id
 const editWorkshopById = (req, res) => {
-
-
-
   workshops.findByIdAndUpdate({ _id: req.params.id }, {
     name: req.body.name,
     email: req.body.email,
@@ -210,7 +207,7 @@ const editWorkshopById = (req, res) => {
         msg: "Updated successfully"
       })
     }).catch(err => {
-
+console.log(err);
       res.json({
         status: 500,
         msg: "Data not Updated",
@@ -306,6 +303,7 @@ module.exports = {
   viewWorkshopById,
   viewApprovedWorkshops,
   editWorkshopById,
+  upload,
   forgotPwd,
   deleteWorkshopById
 }

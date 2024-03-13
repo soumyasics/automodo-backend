@@ -26,7 +26,7 @@ router.post('/deleteCustomerById/:id', customers.deleteCustomerById)
 router.post('/registerWorkshop', workshops.upload, workshops.registerWorkshop)
 router.post('/viewWorkshopReqs', workshops.viewWorkshopReqs)
 router.post('/viewWorkshopById/:id', workshops.viewWorkshopById)
-router.post('/editWorkshopById/:id', workshops.editWorkshopById)
+router.post('/editWorkshopById/:id', workshops.upload,workshops.editWorkshopById)
 router.post('/approveWorkshopById/:id', workshops.approveWorkshopById)
 router.post('/viewApprovedWorkshops', workshops.viewApprovedWorkshops)
 router.post('/loginworkshops', workshops.loginworkshops)
@@ -64,6 +64,8 @@ router.post('/viewBookingByCustid/:id', booking.viewBookingByCustid)
 router.post('/approveBookingByWid/:id', booking.approveBookingByWid)
 router.post('/assignMechForService/:id', booking.assignMechForService)
 router.post('/viewBookingByMechid/:id', booking.viewBookingByMechid)
+router.post('/deleteservicebookingById/:id', booking.deleteservicebookingById)
+
 // router.post('/updatePaymentbyBookingId', booking.updatePaymentbyBookingId) -- not needed
 
 //spareparts
@@ -71,8 +73,8 @@ router.post('/addSpareParts',sparepartController.upload, sparepartController.add
 router.post('/viewSparePartById/:id', sparepartController.viewSparePartById)
 router.post('/searchSparePartByName/:partName',sparepartController.searchSparePartByName)
 router.post('/editSparePartById/:id',sparepartController.upload, sparepartController.editSparePartById)
-router.post('/deleteSparePartById/:partName',sparepartController.deleteSparePartById)
-router.post('/viewSparePartByWid',sparepartController.viewSparePartByWid)
+router.post('/deleteSparePartById/:id',sparepartController.deleteSparePartById)
+router.post('/viewSparePartByWid/:id',sparepartController.viewSparePartByWid)
 router.post('/viewallSpareParts',sparepartController.viewallSpareParts)
 
 //spare part booking
@@ -85,6 +87,12 @@ router.post('/viewSparePartBookingByWid/:id',spareOrderController.viewSparePartB
 router.post('/addEmergency',emergencyController.addEmergency)
 router.post('/adminApproveEmergencyReqs/:id',emergencyController.adminApproveEmergencyReqs)
 router.post('/viewEmergencyForShops',emergencyController.viewEmergencyForShops)
+router.post('/adminViewEmergencyReqs',emergencyController.adminViewEmergencyReqs)
+router.post('/viewEmergencyById/:id',emergencyController.viewEmergencyById)
+router.post('/viewEmergencyForShops',emergencyController.viewEmergencyForShops)
+router.post('/shopAcceptEmergencyReq/:id',emergencyController.shopAcceptEmergencyReq)
+router.post('/assignMechForEmergencyService/:id',emergencyController.assignMechForEmergencyService)
+
 
 
 module.exports = router

@@ -154,7 +154,7 @@ const addEmergency =async (req, res) => {
             shopid: null,
             district: { $in: districts }
         });
-
+        
         // Send the emergency requests to the client
         if(emergencyRequests.length>0)
         res.json({
@@ -269,6 +269,7 @@ const addServiceandPaymentByMech=(req,res)=>{
 }
 const viewEmergencyById = (req, res) => {
   emergencySchema.findById({_id:req.params.id})
+  .populate('custid')
   .exec()
     .then(data => {
       console.log(data);
