@@ -87,6 +87,12 @@ router.post('/viewSparePartBookingByWid/:id',spareOrderController.viewSparePartB
 router.post('/addEmergency',emergencyController.addEmergency)
 router.post('/adminApproveEmergencyReqs/:id',emergencyController.adminApproveEmergencyReqs)
 router.post('/viewEmergencyForShops',emergencyController.viewEmergencyForShops)
+router.post('/adminViewEmergencyReqs',emergencyController.adminViewEmergencyReqs)
+router.post('/viewEmergencyById/:id',emergencyController.viewEmergencyById)
+router.post('/viewEmergencyForShops',emergencyController.viewEmergencyForShops)
+router.post('/shopAcceptEmergencyReq/:id',emergencyController.shopAcceptEmergencyReq)
+router.post('/assignMechForEmergencyService/:id',emergencyController.assignMechForEmergencyService)
+
 
 
 module.exports = router
