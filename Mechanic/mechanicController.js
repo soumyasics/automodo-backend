@@ -143,13 +143,11 @@ const editMechanicById = (req, res) => {
   mechSchema.findByIdAndUpdate({ _id: req.params.id }, {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
-
     email: req.body.email,
-
     contact: req.body.contact,
-    password: req.body.password,
     gender: req.body.gender,
-    image: req.file
+    image: req.file,
+    aadhar: req.body.aadhar
   })
     .exec().then(data => {
       res.json({
