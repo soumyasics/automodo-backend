@@ -13,6 +13,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage }).array("files");
+const upload2 = multer({ storage: storage }).single("image");
+
 //User Registration
 
 const addMechanic = (req, res) => {
@@ -274,6 +276,7 @@ module.exports = {
   addMechanic,
   viewMechanics,
   upload,
+  upload2,
   loginMech,
   viewMechById,
   editMechanicById,
