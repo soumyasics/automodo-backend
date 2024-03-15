@@ -149,7 +149,8 @@ const editMechanicById = (req, res) => {
     image: req.file,
     aadhar: req.body.aadhar
   })
-    .exec().then(data => {
+    .exec()
+    .then(data => {
       res.json({
         status: 200,
         msg: "Updated successfully"
