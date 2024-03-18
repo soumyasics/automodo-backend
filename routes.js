@@ -93,6 +93,8 @@ router.post('/viewEmergencyForShops',emergencyController.viewEmergencyForShops)
 router.post('/shopAcceptEmergencyReq/:id',emergencyController.shopAcceptEmergencyReq)
 router.post('/assignMechForEmergencyService/:id',emergencyController.assignMechForEmergencyService)
 router.post('/viewEmergencyByMechid/:id',emergencyController.viewEmergencyByMechid)
+router.post('/addServiceandPaymentByMech/:id',emergencyController.addServiceandPaymentByMech)
+router.post('/adminRejectEmergencyReqs/:id',emergencyController.adminRejectEmergencyReqs)
 
 
 

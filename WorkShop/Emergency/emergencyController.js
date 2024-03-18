@@ -227,7 +227,7 @@ const viewEmergencyByMechid = (req, res) => {
   .populate('custid')
   .exec()
     .then(data => {
-      console.log(data);
+      // console.log(data);
       res.json({
         status: 200,
         msg: "Data obtained successfully",
@@ -245,6 +245,7 @@ const viewEmergencyByMechid = (req, res) => {
 
 }
 const addServiceandPaymentByMech=(req,res)=>{
+  console.log(req.body.payment,req.body.service,req.params.id);
   emergencySchema.findByIdAndUpdate({_id:req.params.id},{
     payment:req.body.payment,
     service:req.body.service,
@@ -272,7 +273,7 @@ const viewEmergencyById = (req, res) => {
   .populate('custid')
   .exec()
     .then(data => {
-      console.log(data);
+      // console.log(data);
       res.json({
         status: 200,
         msg: "Data obtained successfully",
