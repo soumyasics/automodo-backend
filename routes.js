@@ -97,3 +97,5 @@ router.post('/viewEmergencyByMechid/:id',emergencyController.viewEmergencyByMech
 
 
 module.exports = router
+
+
