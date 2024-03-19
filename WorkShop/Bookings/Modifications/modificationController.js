@@ -35,7 +35,7 @@ await ServiceUpdate.find({
 if(datas.length>0)
  flag=1
 }).catch(err=>{
-console.log(TypeError);
+console.log(err);
 })
     const newServiceUpdate = new ServiceUpdate({
         custid:custid,
@@ -46,7 +46,8 @@ console.log(TypeError);
         finaldate,
         mechid:mechid,
         image:req.file,
-        comments
+        comments,
+        bookingid:req.params.id
     });
 
     if(flag==0){
