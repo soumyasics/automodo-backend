@@ -54,6 +54,7 @@ router.post('/editServiceById/:id', services.editServiceById)
 router.post('/viewServiceById/:id', services.viewServiceById)
 router.post('/deleteServiceById/:id', services.deleteServiceById)
 router.post('/viewallservices', services.viewallservices)
+router.post('/editServiceById/:id', services.editServiceById)
 
 
 //booking routes
@@ -93,9 +94,12 @@ router.post('/viewEmergencyForShops',emergencyController.viewEmergencyForShops)
 router.post('/shopAcceptEmergencyReq/:id',emergencyController.shopAcceptEmergencyReq)
 router.post('/assignMechForEmergencyService/:id',emergencyController.assignMechForEmergencyService)
 router.post('/viewEmergencyByMechid/:id',emergencyController.viewEmergencyByMechid)
+router.post('/viewEmergenciesByCustId/:id',emergencyController.viewEmergenciesByCustId)
 router.post('/addServiceandPaymentByMech/:id',emergencyController.addServiceandPaymentByMech)
 router.post('/adminRejectEmergencyReqs/:id',emergencyController.adminRejectEmergencyReqs)
 
 
 
 module.exports = router
+
+

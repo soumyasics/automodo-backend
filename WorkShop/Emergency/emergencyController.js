@@ -271,6 +271,8 @@ const addServiceandPaymentByMech=(req,res)=>{
 const viewEmergencyById = (req, res) => {
   emergencySchema.findById({_id:req.params.id})
   .populate('custid')
+  .populate('shopid')
+  .populate('mechid')
   .exec()
     .then(data => {
       // console.log(data);
@@ -315,6 +317,30 @@ const updatePaymentbyBookingId = (req, res) => {
     })
 
 }
+const viewEmergenciesByCustId = (req, res) => {
+  emergencySchema.find({custid:req.params.id})
+  .populate('shopid')
+  .populate('mechid')
+
+  .exec()
+    .then(data => {
+      console.log(data);
+      res.json({
+        status: 200,
+        msg: "Data obtained successfully",
+        data: data
+      })
+
+    }).catch(err => {
+      console.log(err);
+      res.json({
+        status: 500,
+        msg: "No Data obtained",
+        Error: err
+      })
+    })
+
+}
   module.exports={
     addEmergency,
     adminApproveEmergencyReqs,
@@ -326,6 +352,7 @@ const updatePaymentbyBookingId = (req, res) => {
 viewEmergencyByMechid,
 addServiceandPaymentByMech,
 viewEmergencyById,
-updatePaymentbyBookingId
+updatePaymentbyBookingId,
+viewEmergenciesByCustId
     
   }
