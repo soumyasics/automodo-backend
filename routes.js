@@ -10,7 +10,7 @@ const sparepartController = require('./WorkShop/SpareParts/sparepartController')
 // const spareparts = require('./WorkShop/SpareParts/sparepartController')
 const spareOrderController = require('./WorkShop/SpareParts/Orders/spareOrderController')
 const emergencyController = require('./WorkShop/Emergency/emergencyController')
-
+const Modifications=require('./WorkShop/Bookings/Modifications/modificationController')
 
 // Customer routes
 router.post('/registerCustomer', customers.upload, customers.registerCustomer)
@@ -98,7 +98,9 @@ router.post('/viewEmergenciesByCustId/:id',emergencyController.viewEmergenciesBy
 router.post('/addServiceandPaymentByMech/:id',emergencyController.addServiceandPaymentByMech)
 router.post('/adminRejectEmergencyReqs/:id',emergencyController.adminRejectEmergencyReqs)
 
-
+router.post('/addServiceUpdate/:id',Modifications.upload, Modifications.addServiceUpdate)
+router.post('/viewServiceUpdateByCustId/:id', Modifications.viewServiceUpdateByCustId)
+router.post('/viewServiceUpdateByMechid/:id', Modifications.viewServiceUpdateByMechid)
 
 module.exports = router
 
