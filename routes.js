@@ -98,9 +98,12 @@ router.post('/viewEmergenciesByCustId/:id',emergencyController.viewEmergenciesBy
 router.post('/addServiceandPaymentByMech/:id',emergencyController.addServiceandPaymentByMech)
 router.post('/adminRejectEmergencyReqs/:id',emergencyController.adminRejectEmergencyReqs)
 
+
+//modification
 router.post('/addServiceUpdate/:id',Modifications.upload, Modifications.addServiceUpdate)
 router.post('/viewServiceUpdateByCustId/:id', Modifications.viewServiceUpdateByCustId)
 router.post('/viewServiceUpdateByMechid/:id', Modifications.viewServiceUpdateByMechid)
+router.post('/viewServiceUpdateByserviceid/:id', Modifications.viewServiceUpdateByserviceid)
 
 module.exports = router
 

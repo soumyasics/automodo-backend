@@ -115,6 +115,29 @@ ServiceUpdate.find({custid:req.params.id})
       })
   
   }
+  const viewServiceUpdateByserviceid = (req, res) => {
+    ServiceUpdate.find({bookingid:req.params.id})
+        .populate('shopid')
+        .exec()
+          .then(data => {
+            console.log(data);
+            res.json({
+              status: 200,
+              msg: "Data obtained successfully",
+              data: data
+            })
+      
+          }).catch(err => {
+            console.log(err);
+            res.json({
+              status: 500,
+              msg: "No Data obtained",
+              Error: err
+            })
+          })
+      
+      }
+    
   const viewServiceUpdateByMechid = (req, res) => {
     ServiceUpdate.find({mechid:req.params.id})
     .populate('custid')
@@ -143,5 +166,6 @@ module.exports = {
     addServiceUpdate,
     upload,
     viewServiceUpdateByMechid,
-    viewServiceUpdateByCustId
+    viewServiceUpdateByCustId,
+    viewServiceUpdateByserviceid
 };
