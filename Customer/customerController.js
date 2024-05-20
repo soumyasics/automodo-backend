@@ -61,9 +61,16 @@ const loginCust = (req, res) => {
     .findOne({ email: email })
     .exec()
     .then((data) => {
-      if(data.length>0){
-        if(password==data.password){
-          res.json({
+      console.log(data);
+      if(!data){
+      return  res.json({
+          status:405,
+          msg:"No User Found",
+          
+      })
+      }
+       else if(password==data.password){
+         return res.json({
             status:200,
             msg:"Login successfully",
             data:data
@@ -75,16 +82,9 @@ const loginCust = (req, res) => {
           
       })
       }
-    }
-    else{
-      res.json({
-        status:401,
-        msg:"No User Found",
-        
-    })
-    }
-      
+    
     }).catch(err=>{
+      console.log(err);
     res.json({
         status:500,
         msg:"Internal server error",
@@ -216,7 +216,8 @@ const forgotPwd = (req, res) => {
       if (data != null)
         res.json({
           status: 200,
-          msg: "Updated successfully"
+          msg: "Updated successfully",
+          data:data
         })
       else
         res.json({

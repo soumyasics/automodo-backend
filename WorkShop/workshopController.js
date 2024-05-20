@@ -98,8 +98,6 @@ const loginworkshops = (req, res) => {
       });
   });
  };
-    
-    
 //Login Workshops --finished
 
 //View all Workshops
@@ -149,6 +147,7 @@ const viewWorkshopReqs = (req, res) => {
       } else {
         res.json({
           status: 200,
+          data:data,
           msg: "No Data obtained ",
         });
       }
@@ -168,48 +167,39 @@ const viewWorkshopReqs = (req, res) => {
 
 const approveWorkshopById = (req, res) => {
   workshops
-    .findByIdAndUpdate({_id:req.params.id,isactive:true})
+    .findByIdAndUpdate({_id:req.params.id},{isactive:true})
     .exec()
-    .then((data) => {
-      if (data.length > 0) {
-        res.json({
-          status: 200,
-          msg: "Data obtained successfully",
-          data: data,
-        });
-      } else {
-        res.json({
-          status: 200,
-          msg: "No Data obtained ",
-        });
-      }
-    })
-    .catch((err) => {
+    .then((result) => {
       res.json({
-        status: 500,
-        msg: "Data not Inserted",
-        Error: err,
-      });
-    });
+          status: 200,
+          data: result,
+          msg: 'data obtained'
+      })
+  })
+  .catch(err => {
+      res.json({
+          status: 500,
+          msg: 'Error in API',
+          err: err
+      })
+  })
 };
 
 // approve Workshops finished
 
 //update  by id
 const editWorkshopById = (req, res) => {
-
-
-
   workshops.findByIdAndUpdate({ _id: req.params.id }, {
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-
+    name: req.body.name,
     email: req.body.email,
-
     contact: req.body.contact,
     password: req.body.password,
-    gender: req.body.gender,
-    image: req.file
+    regno: req.body.regno,
+    city: req.body.city,
+    district: req.body.district,
+    image: req.file,
+    aadhar:req.body.aadhar
+
   })
     .exec().then(data => {
       res.json({
@@ -217,7 +207,7 @@ const editWorkshopById = (req, res) => {
         msg: "Updated successfully"
       })
     }).catch(err => {
-
+console.log(err);
       res.json({
         status: 500,
         msg: "Data not Updated",
@@ -227,6 +217,8 @@ const editWorkshopById = (req, res) => {
 }
 // view  by id
 const viewWorkshopById = (req, res) => {
+  console.log(req.params.id);
+
   workshops.findById({ _id: req.params.id }).exec()
     .then(data => {
       console.log(data);
@@ -311,6 +303,7 @@ module.exports = {
   viewWorkshopById,
   viewApprovedWorkshops,
   editWorkshopById,
+  upload,
   forgotPwd,
   deleteWorkshopById
 }

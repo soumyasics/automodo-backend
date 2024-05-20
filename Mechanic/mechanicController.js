@@ -13,6 +13,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage }).array("files");
+const upload2 = multer({ storage: storage }).single("image");
+
 //User Registration
 
 const addMechanic = (req, res) => {
@@ -26,7 +28,6 @@ const addMechanic = (req, res) => {
     password: req.body.password,
     gender: req.body.gender,
     image: req.files[0],
-
     certificate: req.files[1],
     aadhar: req.body.aadhar
   });
@@ -63,39 +64,40 @@ const loginMech = (req, res) => {
   const password = req.body.password;
 
   mechSchema
-    .findOne({ email: email })
-    .exec()
-    .then((data) => {
-      if (data.length > 0) {
-        if (password == data.password) {
-          res.json({
+  .findOne({ email: email })
+  .exec()
+  .then((data) => {
+    if (!data) {
+        return res.json({
+            status: 400,
+            msg: "User not found"
+        });
+    }
+    if (data.isactive === false) {
+        return res.json({
+            status: 403,
+            msg: "User is not active. Please contact administrator."
+        });
+    }
+    if (password === data.password) {
+        return res.status(200).json({
             status: 200,
             msg: "Login successfully",
             data: data
-          })
-        } else {
-          res.json({
+        });
+    } else {
+        return res.json({
             status: 401,
-            msg: "password Mismatch",
-
-          })
-        }
-      }
-      else {
-        res.json({
-          status: 401,
-          msg: "No User Found",
-
-        })
-      }
-
-    }).catch(err => {
-      res.json({
+            msg: "Password mismatch"
+        });
+    }
+})
+.catch((err) => {
+    res.status(500).json({
         status: 500,
-        msg: "Internal server error",
-        Error: err
-      })
-    })
+        msg: "Internal Server Error"
+    });
+});
 };
 
 
@@ -143,15 +145,14 @@ const editMechanicById = (req, res) => {
   mechSchema.findByIdAndUpdate({ _id: req.params.id }, {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
-
     email: req.body.email,
-
     contact: req.body.contact,
-    password: req.body.password,
     gender: req.body.gender,
-    image: req.file
+    image: req.file,
+    aadhar: req.body.aadhar
   })
-    .exec().then(data => {
+    .exec()
+    .then(data => {
       res.json({
         status: 200,
         msg: "Updated successfully"
@@ -256,6 +257,7 @@ const viewMechanicsByShopid = (req, res) => {
         res.json({
           status: 200,
           msg: "No Data obtained ",
+          data: data,
         });
       }
     })
@@ -274,6 +276,7 @@ module.exports = {
   addMechanic,
   viewMechanics,
   upload,
+  upload2,
   loginMech,
   viewMechById,
   editMechanicById,

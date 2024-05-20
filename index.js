@@ -10,8 +10,8 @@ app.use(express.static(`${__dirname}/upload`));
 
 app.use(cors())
 const route=require('./routes')
-app.use('/automodo',route)
+app.use('/automodo_api',route)
 
-app.listen(4010,()=>{
+app.listen(4006,()=>{
     console.log("Server created successfully at 4010");
 })
