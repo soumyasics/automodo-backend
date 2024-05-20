@@ -40,7 +40,7 @@ router.post('/viewMechanics',mechanic.viewMechanics)
 router.post('/viewMechById/:id',mechanic.viewMechById)
 router.post('/editMechanicById/:id',mechanic.upload2,mechanic.editMechanicById)
 router.post('/loginMech',mechanic.loginMech)
-router.post('/forgotPwdCustomer',mechanic.forgotPwd)
+router.post('/forgotPwdmech',mechanic.forgotPwd)
 router.post('/deleteMechanicById/:id',mechanic.deleteMechanicById)
 router.post('/viewMechanicsByShopid/:id',mechanic.viewMechanicsByShopid)
 
